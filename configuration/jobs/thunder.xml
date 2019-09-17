@@ -1,0 +1,23 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-definition plugin="workflow-job@2.33">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.73">
+    <script>node {
+    
+
+   stage(&apos;Build base image&apos;) { // for display purposes
+      
+      git credentialsId: &apos;github-ssh-key&apos;, url: &apos;git@github.com:Arnio/php_base_images.git&apos;
+      sh label: &apos;&apos;, script: &apos;cd alpine &amp;&amp; ls -la &amp;&amp; docker build -t arnio/alpine-fpm7.3:$BUILD_NUMBER .&apos;
+      sh label: &apos;&apos;, script: &apos;docker images&apos;
+   }
+
+}</script>
+    <sandbox>true</sandbox>
+  </definition>
+  <triggers/>
+  <disabled>false</disabled>
+</flow-definition>
